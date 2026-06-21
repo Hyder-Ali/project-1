@@ -4,3 +4,43 @@ author: "Hyder Ali"
 format: html
 ---
 
+```{r}
+#| message: false 
+#| echo: false
+library(tidyverse)
+library(palmerpenguins)
+```
+
+```{r}
+penguins
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+
+library(ggplot2)
+library(dplyr)
+
+penguins %>%
+  drop_na(bill_length_mm, bill_depth_mm, species) %>%
+  ggplot(aes(
+    x = bill_length_mm,
+    y = bill_depth_mm,
+    color = species
+  )) +
+  geom_point(size = 3, alpha = 0.8) +
+  scale_color_brewer(palette = "Dark2") +
+  labs(
+    title = "Penguin Bill Dimensions by Species",
+    x = "Bill Length (mm)",
+    y = "Bill Depth (mm)",
+    color = "Species"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    legend.position = "bottom"
+  )
+```
